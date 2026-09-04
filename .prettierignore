@@ -1,0 +1,8 @@
+node_modules
+dist
+allure-report
+allure-results
+playwright-report
+test-results
+.synpress-user-data
+package-lock.json

@@ -1,0 +1,83 @@
+name: Web3 QA Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: web3-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Cucumber + Playwright + Synpress (Sepolia)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      # Sepolia testnet only — this suite must never be pointed at mainnet.
+      NETWORK: sepolia
+      TEST_DAPP_URL: ${{ vars.TEST_DAPP_URL || 'https://metamask.github.io/test-dapp/' }}
+      # Test-wallet credentials, stored as GitHub Secrets — never checked in.
+      METAMASK_SEED_PHRASE: ${{ secrets.METAMASK_SEED_PHRASE }}
+      METAMASK_PASSWORD: ${{ secrets.METAMASK_PASSWORD }}
+      CI: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Set up Java (required by the Allure CLI)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run Cucumber/Synpress test suite
+        run: npm test
+
+      - name: Generate Allure report
+        if: always()
+        run: npm run report:generate
+
+      - name: Upload Allure report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 14
+
+      - name: Upload raw Allure results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 14
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: test-results/
+          retention-days: 7

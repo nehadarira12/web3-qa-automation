@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Secrets — never commit a real .env
+.env
+.env.local
+
+# Build output
+dist/
+
+# Playwright / Synpress
+test-results/
+playwright-report/
+playwright/.cache/
+.synpress-user-data/
+.cache-synpress/
+
+# Allure
+allure-results/
+allure-report/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/

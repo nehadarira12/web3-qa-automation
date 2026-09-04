@@ -1,0 +1,60 @@
+{
+  "name": "web3-qa-automation",
+  "version": "1.0.0",
+  "description": "Production-grade Web3 QA automation framework — Playwright + Synpress (MetaMask) + Cucumber BDD, targeting the MetaMask test dApp on Sepolia testnet.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.19.0"
+  },
+  "scripts": {
+    "test": "cross-env NODE_OPTIONS=--import=tsx/esm cucumber-js",
+    "test:critical": "cross-env NODE_OPTIONS=--import=tsx/esm cucumber-js --tags @critical",
+    "test:high": "cross-env NODE_OPTIONS=--import=tsx/esm cucumber-js --tags @high",
+    "test:wallet": "cross-env NODE_OPTIONS=--import=tsx/esm cucumber-js features/wallet",
+    "test:transactions": "cross-env NODE_OPTIONS=--import=tsx/esm cucumber-js features/transactions",
+    "test:error-handling": "cross-env NODE_OPTIONS=--import=tsx/esm cucumber-js features/error-handling",
+    "wallet:cache": "synpress wallet-setup",
+    "report:generate": "allure generate ./allure-results --clean -o ./allure-report",
+    "report:open": "allure open ./allure-report",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{ts,js,json,md,yml,feature}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,yml,feature}\"",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.2.1",
+    "@playwright/test": "1.48.2",
+    "@synthetixio/synpress": "^4.1.2",
+    "@synthetixio/synpress-cache": "0.0.14",
+    "@types/node": "^22.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.68.0",
+    "@typescript-eslint/parser": "^8.68.0",
+    "allure-commandline": "^2.43.0",
+    "allure-cucumberjs": "^3.11.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.4.1",
+    "prettier": "^3.9.6",
+    "prettier-plugin-gherkin": "^4.0.0",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,feature}": [
+      "prettier --write"
+    ]
+  }
+}
