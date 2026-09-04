@@ -1,10 +1,8 @@
 # Web3 QA Automation Suite
 
-[![Web3 QA Tests](https://github.com/YOUR_GITHUB_USERNAME/web3-qa-automation/actions/workflows/web3-tests.yml/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/web3-qa-automation/actions/workflows/web3-tests.yml)
+[![Web3 QA Tests](https://github.com/nehadarira12/web3-qa-automation/actions/workflows/web3-tests.yml/badge.svg)](https://github.com/nehadarira12/web3-qa-automation/actions/workflows/web3-tests.yml)
 
 A BDD-driven QA automation framework for testing dApp ↔ MetaMask interactions: wallet connection, network switching, token transfers, and error handling. Built with **Playwright**, **Synpress**, **Cucumber.js**, and **TypeScript**, targeting MetaMask's own [test dApp](https://metamask.github.io/test-dapp/) on the **Sepolia testnet**.
-
-> Replace `YOUR_GITHUB_USERNAME` above with this repo's actual owner/name once pushed, so the badge resolves.
 
 > **Status:** the framework, its 19 scenarios, config, and wallet onboarding are all verified working against the real MetaMask extension. End-to-end runs are currently blocked past the "approve dApp connection" step by an **open, unresolved bug in Synpress 4.1.2 itself** (reproduces through Synpress's own CLI, not just this project's code) — see [Known limitations](#known-limitations--before-you-run-this-for-real) for the full root-cause writeup and the upstream issue link.
 
