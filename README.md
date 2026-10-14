@@ -1,6 +1,5 @@
 # Web3 QA Automation Suite
 
-[![Web3 QA Tests](https://github.com/nehadarira12/web3-qa-automation/actions/workflows/web3-tests.yml/badge.svg)](https://github.com/nehadarira12/web3-qa-automation/actions/workflows/web3-tests.yml)
 
 A BDD-driven QA automation framework for testing dApp ↔ MetaMask interactions: wallet connection, network switching, token transfers, and error handling. Built with **Playwright**, **Synpress**, **Cucumber.js**, and **TypeScript**, targeting MetaMask's own [test dApp](https://metamask.github.io/test-dapp/) on the **Sepolia testnet**.
 
