@@ -1,7 +1,7 @@
 {
   "name": "web3-qa-automation",
   "version": "1.0.0",
-  "description": "Production-grade Web3 QA automation framework — Playwright + Synpress (MetaMask) + Cucumber BDD, targeting the MetaMask test dApp on Sepolia testnet.",
+  "description": "Web3 QA automation framework — Playwright + Synpress (MetaMask) + Cucumber BDD, targeting the MetaMask test dApp on Sepolia testnet.",
   "private": true,
   "license": "MIT",
   "type": "module",
